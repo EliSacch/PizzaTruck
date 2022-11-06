@@ -36,12 +36,25 @@ Pizza Truck is an Order Management System for a pizza restaurant.
 
 
 ### User Stories
+- As a restaurant owner I want that:
+    - A system that helps me manage the orders.
+    - All the options in the menu are displayed to the users.
+    - Users cannot order something that is not in the displayed options.
+    - The order price is calclated correctly.
 
+- As a user I want:
+    - That the system is easy to use and provides clear instructions.
+    - See all the available options.
+    - Being able to personalize my order.
+    - Being able to check and modify my order before placing it.
+    - That the price is calculated correctly.
 
 
 ### Flow Chart
 
+To develop a program that answers all the needs identified above, I have created the following flow chart:
 
+![Flow_Chart](media/flow_chart.png)
 
 ## Features 
 
