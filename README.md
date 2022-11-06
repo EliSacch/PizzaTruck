@@ -1,31 +1,120 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Pizza Truck
 
-Welcome USER_NAME,
+Pizza Truck is an Order Management System for a pizza restaurant.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
 
-## Reminders
+## Table of content
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+- [Design and User Experience](#design-and-user-experience)
+  - [User Stories](#user-stories)
+  - [Flow Chart](#flow-chart)
 
-## Creating the Heroku app
+- [Features](#features)
+  
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+- [Testing](#testing)
+  - [Tests](#tests)
+  - [Validator Testing](#validator-testing)
+  - [Fixed bugs](#fixed-bugs)
+  - [Unfixed bugs](#unfixed-bugs)
+  - [Performance](#performance)
 
-1. `heroku/python`
-2. `heroku/nodejs`
+- [Deployment](#deployment)
+  - [Live Website](#live-website)
+  - [Local Deployment](#local-deployment)
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+- [Credits](#credits)
+  - [Code](#code)
+  - [Content](#content)
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+- [Technologies used](#technologies-used)
 
-Connect your GitHub repository and deploy as normal.
+- [Acknowledgements](#acknowledgements)
 
-## Constraints
+## Design and User Experience
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
 
------
-Happy coding!
+
+### User Stories
+
+
+
+### Flow Chart
+
+
+
+## Features 
+
+
+## Testing 
+
+
+### Tests
+
+  <details>
+  <summary>Home page - General</summary>
+
+  |Action | Expected behavious | Pass / Fail|
+  |-------|--------------------|-------|
+  |Action here | Expected behavious here | Pass |
+  |Action here | Expected behavious here | Pass |
+  |Action here | Expected behavious here | Pass |
+  |Action here | Expected behavious here | Pass |
+  |Action here | Expected behavious here | Pass |
+  |Action here | Expected behavious here | Pass |
+  |Action here | Expected behavious here | Pass |
+  |Action here | Expected behavious here | Pass |
+
+  </details>
+
+
+
+
+### Validator Testing
+
+
+### Fixed Bugs
+
+
+### Unfixed Bugs
+
+- There are no known unfixed bugs.
+
+
+### Performance
+
+
+## Deployment
+
+
+### Live Website
+
+
+### Local Deployment
+  - For a local deployment follow these steps:
+    - Create a new directory on your machine, where you want do deploy the files
+    - Open the existing repository in GitHub
+    - Go to the "Code" tab
+    - Click on the "Code" button
+    - Copy the HTTPS link
+    - Open your terminal and run the command __git clone 'link'__
+    - use the link just copied, without quotes, instead of 'link'
+
+## Credits 
+
+### Code
+- For this project I used the "Code Institute student template" required for deploying my third portfolio project (the Python command-line project). 
+
+- The code to display the intro message as typwriter was taken from the [Learn Learn Scratch Tutorial](https://www.youtube.com/watch?v=2h8e0tXHfk0)
+
+
+### Content
+
+
+## Technologies used
+
+  - Python
+
+## Acknowledgements
+
+A special thank to my mentor __Dick Vlaanderen__ for his precious feedback on this project.
