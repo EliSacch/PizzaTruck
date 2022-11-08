@@ -1,5 +1,7 @@
 import sys,time,os
 
+# GENERAL FUNCTIONS
+
 def type_intro(message, speed):
     """
     This function takes a message as input and prints it one char at a time.
@@ -19,8 +21,8 @@ def main_menu():
     Validates the input to check if it's a valid action.
     Runs a sifferent function based on the returned action.
     """
-    intro_message = "\n\nWelcome to Pizza Truck!\nCheck our menu and place your order.\n"
-    type_intro(intro_message, 0.05)
+    INTRO_MESSAGE = "\n\nWelcome to Pizza Truck!\nCheck our menu and place your order.\n"
+    type_intro(INTRO_MESSAGE, 0.05)
 
     menu_options = ["Menu and Order", "View current order"]
     action = display_options(menu_options)
@@ -48,7 +50,6 @@ def display_options(options):
 
     return int(choosen_action) 
 
-    
 
 def validate_action(action, choices):
     """
@@ -69,28 +70,9 @@ def validate_action(action, choices):
         
     return True
 
-def display_menu():
-    """
-    This function shows the available pizzas
-    """
-    pizzas = [
-        "Margherita(White dough, tomato sauce, mozzarella chese, basil)", 
-        "Vegan(Wholegrain dough, tomato sauce, vegan cheese, mushrooms",
-        "Spicy{White dough, bbq sauce, mozzarella cheese, pepperoni",
-        "Truffle(White dough, mozzarella cheese, mushrooms, black truffle",
-        "Make your own"]
 
-    print("\nMenu:\n")
-
-    for pizza in pizzas:
-        number = pizzas.index(pizza) + 1
-        menu = f"{number}- {pizza}\n"
-        type_intro(menu, 0.001)
-
-    show_order_options()
-    
-    
-    
+# ORDER RELATED FUNCTIONS
+      
 def show_order_options():
     """
     This functions displays order options
@@ -100,17 +82,63 @@ def show_order_options():
         "Add pizza",
         "Remove pizza",
         "Finish",
-        "Main menu"
+        "Main options"
     ]
+
+    pizzas = [
+        "Margherita (White dough, tomato sauce, mozzarella chese, basil)", 
+        "Vegan (Wholegrain dough, tomato sauce, vegan cheese, mushrooms",
+        "Spicy {White dough, bbq sauce, mozzarella cheese, pepperoni",
+        "Truffle (White dough, mozzarella cheese, mushrooms, black truffle",
+        "Make your own"]
 
     action = display_options(menu_options)
     if action == 1:
-        display_menu()
+        show_menu(pizzas)
+    if action == 2:
+        add_pizza(pizzas)
     if (action == 5):
         main_menu()
     else:
         print("Other action")
 
+
+def show_menu(pizzas):
+    """
+    This function shows the available pizzas
+    """
+
+    print("\nMenu:\n")
+
+    for pizza in pizzas:
+        number = pizzas.index(pizza) + 1
+        menu = f"{number}- {pizza}\n"
+        type_intro(menu, 0.001)
+
+    show_order_options()
+
+
+def add_pizza(pizzas):
+    """
+    This function takes one input from the user, corresponding to the pizza they want to order.
+    It adds the pizza to the crrent_order array.
+    """
+    current_order = []
+
+    while True:
+        choosen_pizza = input("\nEnter the number corresponding to the desired pizza: ")
+        if int(choosen_pizza) == 0:
+            print("Finish")
+            break
+        if validate_action(choosen_pizza, pizzas):
+            print(f"choosen: {choosen_pizza}, {pizzas[int(choosen_pizza)-1]}")
+
+            #current_order.append(pizzas(choosen_pizza))
+
+    #return int(choosen_action) 
+
+
+# BASKET AND CHECKOUT RELATED FUNCTIONS
 
 def display_current_order():
     """
@@ -118,6 +146,8 @@ def display_current_order():
     """
     print("Here is the current order:")
 
+
+# MAIN
 
 def main():
     """
