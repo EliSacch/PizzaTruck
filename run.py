@@ -5,6 +5,12 @@ import time
 
 current_order = []
 
+pizzas = [
+        "margherita",
+        "spicy",
+        "vegan"
+        ]
+
 
 def type_intro(message, speed):
     """
@@ -16,7 +22,22 @@ def type_intro(message, speed):
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(speed)
-# Rnd of code from Learn Learn Scratch Tutorials
+# End of code from Learn Learn Scratch Tutorials
+
+
+def show_main_menu():
+    """
+    Displays the main menu
+    """
+    menu_options = ["Menu and Order"]
+    if len(current_order) != 0:
+        menu_options.append("View current order")
+
+    action = display_options(menu_options)
+    if action == 1:
+        show_order_options()
+    if action == 2:
+        display_current_order()
 
 
 def main_menu():
@@ -30,13 +51,7 @@ def main_menu():
     file.close()
 
     # type_intro(INTRO_MESSAGE, 0.05)
-
-    menu_options = ["Menu and Order", "View current order"]
-    action = display_options(menu_options)
-    if action == 1:
-        show_order_options()
-    if action == 2:
-        display_current_order()
+    show_main_menu()
 
 
 def display_options(options):
@@ -91,19 +106,11 @@ def show_order_options():
         "Main options"
     ]
 
-    pizzas = [
-        "margherita",
-        "spicy",
-        "vegan"
-        ]
-
     action = display_options(menu_options)
     if action == 1:
         show_menu(pizzas)
     elif action == 2:
         current_order.extend(add_pizza(pizzas))
-        for item in current_order:
-            print(item)
         show_order_options()
     elif (action == 5):
         main_menu()
@@ -140,7 +147,7 @@ def add_pizza(pizzas):
     while True:
         choosen_pizza = input("\nAdd pizza: ")
         if choosen_pizza == "0":
-            print("Finish")
+            print(f"\n{len(add_to_order)} pizzas added to your order")
             break
         elif validate_action(choosen_pizza, pizzas):
             add_to_order.append(pizzas[int(choosen_pizza)-1])
@@ -154,7 +161,14 @@ def display_current_order():
     """
     This function displays the items currently added to the order.
     """
-    print("Here is the current order:")
+    print("\nCurrent order:\n***************")
+    for type in pizzas:
+        num = current_order.count(type)
+        if num == 0:
+            pass
+        else:
+            print(f"{num} X {type}")
+    show_main_menu()
 
 
 # MAIN
