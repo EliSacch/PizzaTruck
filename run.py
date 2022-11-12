@@ -23,11 +23,11 @@ def main_menu():
     Validates the input to check if it's a valid action.
     Runs a sifferent function based on the returned action.
     """
-    file = open("logo.txt")
+    file = open("intro.txt")
     INTRO_MESSAGE = file.read()
     file.close()
 
-    type_intro(INTRO_MESSAGE, 0.05)
+    # type_intro(INTRO_MESSAGE, 0.05)
 
     menu_options = ["Menu and Order", "View current order"]
     action = display_options(menu_options)
@@ -53,20 +53,20 @@ def display_options(options):
     return int(choosen_action)
 
 
-def validate_action(action, choices):
+def validate_action(value, choices):
     """
     Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
     or if it is outside of the range of choices.
     """
     try:
-        is_integer = int(action)
-        action = (is_integer-1)
+        if value.isnumeric() is False:
+            raise ValueError('Please, enter a whole number')
+        action = int(value)-1
         is_valid_choice = action >= 0 and action < len(choices)
-
-        if is_integer is False or is_valid_choice is False:
-            raise ValueError("Please, enter the number corrisponding action")
-    except ValueError as e:
+        if is_valid_choice is False:
+            raise IndexError("No action corresponding to this number")
+    except (ValueError, IndexError) as e:
         print(f"\nInvalid data: {e}. Please try again.")
         return False
 
