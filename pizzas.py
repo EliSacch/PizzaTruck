@@ -12,11 +12,17 @@ class Pizza:
     def description(self):
         name = self.name.capitalize()
         ingredients = ""
-        ingredients += f"{self.dough.capitalize()} dough"
-        ingredients += f", {self.sauce.capitalize()} sauce"
-        for item in self.toppings:
-            ingredients += f", {item.capitalize()}"
-        return f"{name} ({ingredients})"
+        if self.dough != "":
+            ingredients += f"{self.dough.capitalize()} dough"
+        if self.sauce != "":
+            ingredients += f", {self.sauce.capitalize()} sauce"
+        if len(self.toppings) != 0:
+            for item in self.toppings:
+                ingredients += f", {item.capitalize()}"
+        if ingredients != "":
+            ingredients = f"({ingredients})"
+
+        return f"{name} {ingredients}"
 
 
 margherita = Pizza(
