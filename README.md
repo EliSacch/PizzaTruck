@@ -110,6 +110,23 @@ To develop a program that answers all the needs identified above, I have created
 
     </details>
 
+- __remove_pizza was removing more than 1 pizza at a time__ 
+
+  When removing the pizza, if there were multiple pizza of the same type one after the other, the function was removing more than one at a time.
+    <details>
+    <summary>See bug screenshot</summary>
+    
+    ![Bug](media/remove-pizza-bug.png)
+
+    </details>
+    To fix this bug I added a break keyword to remove only 1 item at a time
+    <details>
+    <summary>See fix screenshot</summary>
+    
+    ![Fix](media/remove-pizza-fix.png)
+
+    </details>
+
 
 ### Unfixed Bugs
 
