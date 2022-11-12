@@ -3,6 +3,8 @@ import time
 
 # GENERAL FUNCTIONS
 
+current_order = []
+
 
 def type_intro(message, speed):
     """
@@ -28,8 +30,6 @@ def main_menu():
     file.close()
 
     # type_intro(INTRO_MESSAGE, 0.05)
-
-    current_order = []
 
     menu_options = ["Menu and Order", "View current order"]
     action = display_options(menu_options)
@@ -101,7 +101,9 @@ def show_order_options():
     if action == 1:
         show_menu(pizzas)
     elif action == 2:
-        add_pizza(pizzas)
+        current_order.extend(add_pizza(pizzas))
+        for item in current_order:
+            print(item)
         show_order_options()
     elif (action == 5):
         main_menu()
@@ -143,7 +145,7 @@ def add_pizza(pizzas):
         elif validate_action(choosen_pizza, pizzas):
             add_to_order.append(pizzas[int(choosen_pizza)-1])
 
-    print(add_to_order)
+    return add_to_order
 
 
 # BASKET AND CHECKOUT RELATED FUNCTIONS
