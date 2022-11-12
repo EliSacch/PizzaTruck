@@ -59,4 +59,4 @@ custom = Pizza(
     8.00)
 
 
-pizzas = [margherita, vegan, spicy, truffle, custom]
+pizza_menu = [margherita, vegan, spicy, truffle, custom]

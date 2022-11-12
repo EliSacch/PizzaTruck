@@ -1,15 +1,10 @@
 import sys
 import time
+from pizzas import pizza_menu
 
 # GENERAL FUNCTIONS
 
 current_order = []
-
-pizzas = [
-        "margherita",
-        "spicy",
-        "vegan"
-        ]
 
 
 def type_intro(message, speed):
@@ -108,9 +103,9 @@ def show_order_options():
 
     action = display_options(menu_options)
     if action == 1:
-        show_menu(pizzas)
+        show_menu()
     elif action == 2:
-        current_order.extend(add_pizza(pizzas))
+        current_order.extend(add_pizza(pizza_menu))
         show_order_options()
     elif (action == 5):
         main_menu()
@@ -118,22 +113,22 @@ def show_order_options():
         print("Other action")
 
 
-def show_menu(pizzas):
+def show_menu():
     """
     This function shows the available pizzas
     """
 
     print("\nMenu:\n")
 
-    for pizza in pizzas:
-        number = pizzas.index(pizza) + 1
-        menu = f"{number}- {pizza}\n"
+    for pizza in pizza_menu:
+        number = pizza_menu.index(pizza) + 1
+        menu = f"{number}- {pizza.description()}\n"
         type_intro(menu, 0.001)
 
     show_order_options()
 
 
-def add_pizza(pizzas):
+def add_pizza(pizza_menu):
     """
     This function takes one integer as input from the user.
     The integer needs to correspond to the pizza they want to order.
@@ -149,8 +144,8 @@ def add_pizza(pizzas):
         if choosen_pizza == "0":
             print(f"\n{len(add_to_order)} pizzas added to your order")
             break
-        elif validate_action(choosen_pizza, pizzas):
-            add_to_order.append(pizzas[int(choosen_pizza)-1])
+        elif validate_action(choosen_pizza, pizza_menu):
+            add_to_order.append(pizza_menu[int(choosen_pizza)-1])
 
     return add_to_order
 
@@ -162,12 +157,12 @@ def display_current_order():
     This function displays the items currently added to the order.
     """
     print("\nCurrent order:\n***************")
-    for type in pizzas:
+    for type in pizza_menu:
         num = current_order.count(type)
         if num == 0:
             pass
         else:
-            print(f"{num} X {type}")
+            print(f"{num} X {type.name}")
     show_main_menu()
 
 
