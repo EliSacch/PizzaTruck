@@ -33,6 +33,7 @@ def show_main_menu():
         show_order_options()
     if action == "View current order":
         display_current_order()
+        show_main_menu()
     if action == "Exit program":
         print("\nThank you for visiting Pizza Truck\n")
         exit()
@@ -104,7 +105,7 @@ def show_order_options():
     ]
 
     if len(current_order) != 0:
-        menu_options.insert(-2, "View current order")
+        menu_options.insert(-1, "View current order")
 
     action = menu_options[display_options(menu_options)-1]
     if action == "Show menu":
@@ -113,9 +114,10 @@ def show_order_options():
         current_order.extend(add_pizza(pizza_menu))
         show_order_options()
     elif action == "Remove pizza":
-        print("Remove pizza")
+        remove_pizza()
     elif action == "View current order":
         display_current_order()
+        show_main_menu()
     elif action == "Main options":
         show_main_menu()
     else:
@@ -159,6 +161,41 @@ def add_pizza(pizza_menu):
     return add_to_order
 
 
+def remove_pizza():
+    """
+    This functions removes selected item from current order
+    """
+
+    print("\nSelect the number corresponding to the pizza you want to remove")
+    print("\nEnter 0 to exit")
+
+    while True:
+        order_items = []
+        items_count = []
+        print("\nCurrent order:\n***************")
+        for type in pizza_menu:
+            num = current_order.count(type)
+            if num == 0:
+                pass
+            else:
+                order_items.append(type.name)
+                items_count.append(num)
+
+        for item, count in zip(order_items, items_count):
+            ind = (order_items.index(item)) + 1
+            print(f"{ind}- {item} (X{count})")
+
+        choosen_pizza = input("\nRemove pizza: ")
+        if choosen_pizza == "0":
+            break
+        elif validate_action(choosen_pizza, current_order):
+            to_be_removed = order_items[int(choosen_pizza)-1]
+            for item in current_order:
+                if item.name == to_be_removed:
+                    current_order.remove(item)
+                    break
+
+
 # BASKET AND CHECKOUT RELATED FUNCTIONS
 
 def display_current_order():
@@ -172,7 +209,6 @@ def display_current_order():
             pass
         else:
             print(f"{num} X {type.name}")
-    show_main_menu()
 
 
 # MAIN
