@@ -29,6 +29,8 @@ def main_menu():
 
     # type_intro(INTRO_MESSAGE, 0.05)
 
+    current_order = []
+
     menu_options = ["Menu and Order", "View current order"]
     action = display_options(menu_options)
     if action == 1:
@@ -65,7 +67,7 @@ def validate_action(value, choices):
         action = int(value)-1
         is_valid_choice = action >= 0 and action < len(choices)
         if is_valid_choice is False:
-            raise IndexError("No action corresponding to this number")
+            raise IndexError("No option corresponding to this number")
     except (ValueError, IndexError) as e:
         print(f"\nInvalid data: {e}. Please try again.")
         return False
@@ -79,6 +81,8 @@ def show_order_options():
     """
     This functions displays order options
     """
+    global current_order
+
     menu_options = [
         "Show menu",
         "Add pizza",
@@ -88,18 +92,18 @@ def show_order_options():
     ]
 
     pizzas = [
-        "Margherita (White dough, tomato sauce, mozzarella chese, basil)",
-        "Vegan (Wholegrain dough, tomato sauce, vegan cheese, mushrooms",
-        "Spicy {White dough, bbq sauce, mozzarella cheese, pepperoni",
-        "Truffle (White dough, mozzarella cheese, mushrooms, black truffle",
-        "Make your own"]
+        "margherita",
+        "spicy",
+        "vegan"
+        ]
 
     action = display_options(menu_options)
     if action == 1:
         show_menu(pizzas)
-    if action == 2:
+    elif action == 2:
         add_pizza(pizzas)
-    if (action == 5):
+        show_order_options()
+    elif (action == 5):
         main_menu()
     else:
         print("Other action")
@@ -126,17 +130,20 @@ def add_pizza(pizzas):
     The integer needs to correspond to the pizza they want to order.
     It adds the pizza to the crrent_order array.
     """
-    add_to_current_order = []
+    add_to_order = []
+
+    print("\nEnter the number corresponding to the pizza")
+    print("Enter 0 (zero) to exit")
 
     while True:
         choosen_pizza = input("\nAdd pizza: ")
-        if int(choosen_pizza) == 0:
+        if choosen_pizza == "0":
             print("Finish")
             break
-        if validate_action(choosen_pizza, pizzas):
-            add_to_current_order.append(pizzas[int(choosen_pizza)-1])
+        elif validate_action(choosen_pizza, pizzas):
+            add_to_order.append(pizzas[int(choosen_pizza)-1])
 
-    return add_to_current_order
+    print(add_to_order)
 
 
 # BASKET AND CHECKOUT RELATED FUNCTIONS
