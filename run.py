@@ -24,15 +24,18 @@ def show_main_menu():
     """
     Displays the main menu
     """
-    menu_options = ["Menu and Order"]
+    menu_options = ["Menu and Order", "Exit program"]
     if len(current_order) != 0:
-        menu_options.append("View current order")
+        menu_options.insert(-1, "View current order")
 
-    action = display_options(menu_options)
-    if action == 1:
+    action = menu_options[display_options(menu_options)-1]
+    if action == "Menu and Order":
         show_order_options()
-    if action == 2:
+    if action == "View current order":
         display_current_order()
+    if action == "Exit program":
+        print("\nThank you for visiting Pizza Truck\n")
+        exit()
 
 
 def main_menu():
@@ -97,20 +100,26 @@ def show_order_options():
         "Show menu",
         "Add pizza",
         "Remove pizza",
-        "Finish",
         "Main options"
     ]
 
-    action = display_options(menu_options)
-    if action == 1:
+    if len(current_order) != 0:
+        menu_options.insert(-2, "View current order")
+
+    action = menu_options[display_options(menu_options)-1]
+    if action == "Show menu":
         show_menu()
-    elif action == 2:
+    elif action == "Add pizza":
         current_order.extend(add_pizza(pizza_menu))
         show_order_options()
-    elif (action == 5):
-        main_menu()
+    elif action == "Remove pizza":
+        print("Remove pizza")
+    elif action == "View current order":
+        display_current_order()
+    elif action == "Main options":
+        show_main_menu()
     else:
-        print("Other action")
+        print("Action not recognized. Try again")
 
 
 def show_menu():
