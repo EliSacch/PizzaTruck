@@ -88,6 +88,28 @@ To develop a program that answers all the needs identified above, I have created
 
 ### Fixed Bugs
 
+- __ValueError message not working.__ 
+
+  While validating the user input I wanted to display two different messages, dependng on the issue found:
+  1- Confirm if the user enter an integer (ValueError)
+  2- Confirm if the integer corresponds to a valid action or if it is out of range (IndexError)
+  The second check was raising the correct error message, but the ValueError was returning a different message, not allowing the user to understand why the input was invalid.
+    <details>
+    <summary>See bug screenshot</summary>
+    
+    ![Bug](media/input-validation-bug.png)
+
+    </details>
+    To fix this error I split the checks in two different steps:
+    1- Check if the user entered a numeric input, if not raise the ValueError
+    2- If there is no ValueError we convert the input into integer, and we check if it is in range, if not we raise the IndexError
+    <details>
+    <summary>See fix screenshot</summary>
+    
+    ![Fix](media/input-validation-fix.png)
+
+    </details>
+
 
 ### Unfixed Bugs
 
