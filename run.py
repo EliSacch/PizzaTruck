@@ -115,6 +115,7 @@ def show_order_options():
         show_order_options()
     elif action == "Remove pizza":
         remove_pizza()
+        show_order_options()
     elif action == "View current order":
         display_current_order()
         show_main_menu()
