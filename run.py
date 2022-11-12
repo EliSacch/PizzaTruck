@@ -1,6 +1,6 @@
 import sys
 import time
-from pizzas import pizza_menu
+from pizzas import *
 
 # GENERAL FUNCTIONS
 
@@ -157,9 +157,26 @@ def add_pizza(pizza_menu):
             print(f"\n{len(add_to_order)} pizzas added to your order")
             break
         elif validate_action(choosen_pizza, pizza_menu):
-            add_to_order.append(pizza_menu[int(choosen_pizza)-1])
+            if (int(choosen_pizza) == len(pizza_menu) - 1):
+                add_to_order.append(make_custom_pizza())
+            else:
+                add_to_order.append(pizza_menu[int(choosen_pizza)-1])
 
     return add_to_order
+
+
+def make_custom_pizza():
+    """
+    This function creates a new instance of the class pizza
+    """
+    new_custom = Pizza(
+        "make your own",
+        "test",
+        "test",
+        [],
+        8.00)
+
+    return new_custom
 
 
 def remove_pizza():
