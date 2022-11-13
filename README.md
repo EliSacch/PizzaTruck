@@ -110,7 +110,7 @@ To develop a program that answers all the needs identified above, I have created
 
     </details>
 
-- __remove_pizza was removing more than 1 pizza at a time__ 
+- __Remove_pizza removing more than 1 pizza at a time__ 
 
   When removing the pizza, if there were multiple pizza of the same type one after the other, the function was removing more than one at a time.
     <details>
@@ -124,6 +124,27 @@ To develop a program that answers all the needs identified above, I have created
     <summary>See fix screenshot</summary>
     
     ![Fix](media/remove-pizza-fix.png)
+
+    </details>
+
+- __Show_current_order not showing custom pizzas__ 
+
+  When printing the current order the custom pizzas added to the order were not displaying.
+  This was caused by the fact the each custom pizza added to the order is a different object from the custom pizza in manu.
+    <details>
+    <summary>See bug screenshot</summary>
+    
+    ![Bug](media/display-order-bug.png)
+
+    </details>
+    To fix this bug I changed the list from where the pizza types are taken.
+    First I create a new list with each type of pizza actually added to the order, then I count how many times each one of this pizzas appears in the order.
+
+    For the custom pizzas I also display the ingredients; because they are custom so it is useful to see how it is made.
+    <details>
+    <summary>See fix screenshot</summary>
+    
+    ![Fix](media/display-order-fix.png)
 
     </details>
 
