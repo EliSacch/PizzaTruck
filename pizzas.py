@@ -1,7 +1,3 @@
-from validation import *
-from display_option import *
-
-
 class Pizza:
     """
     Creates an instance of pizza
@@ -84,68 +80,3 @@ custom = Pizza(
 
 
 pizza_menu = [margherita, vegan, spicy, truffle, custom]
-
-
-# CUSTOM PIZZA FUNCTIONS
-
-def choose_dough():
-    """
-    This function updates the dough attrobute of custom pizza
-    """
-    options = [
-        "White",
-        "Wholegarain",
-        "Gluten free"
-    ]
-
-    dough = display_ingredients_options(options, "dough")
-
-    if validate_action(dough, options):
-        return options[int(dough)-1]
-
-
-def choose_sauce():
-    """
-    This function updates the sauce attrobute of custom pizza
-    """
-    options = [
-        "Tomato sauce",
-        "BBQ sauce",
-        "No sauce"
-    ]
-
-    sauce = display_ingredients_options(options, "sauce")
-
-    if validate_action(sauce, options):
-        return options[int(sauce)-1]
-
-
-def choose_toppings():
-    """
-    This function updates the toppings attrobute of custom pizza
-    """
-    options = [
-        "Mozzarella",
-        "Scamorza",
-        "Vegan cheese",
-        "Mushrooms",
-        "Jackfruit",
-        "pepperoni",
-        "Black Truffle",
-        "Cherry tomatoes",
-        "Peppers"
-    ]
-
-    toppings = display_toppings_options(options, "toppings")
-
-    return toppings
-
-
-def update_price(toppings):
-    """
-    This function updates the price attrobute of custom pizza
-    """
-    count = len(toppings)
-    price = 8 + (1.5 * count)
-
-    return price

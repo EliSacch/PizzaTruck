@@ -1,11 +1,11 @@
-from tabulate import tabulate
 import sys
 import time
 import os
-import copy
 from validation import *
-from display_option import *
+from display_options import *
 from pizzas import *
+from order import *
+from basket import *
 
 
 # VARIABLES
@@ -50,8 +50,8 @@ def show_main_menu():
         show_order_options()
     if action == "View current order":
         clear_terminal()
-        display_receipt(retrieve_current_order())
-        show_main_menu()
+        display_current_order(retrieve_current_order())
+        show_basket_menu()
     if action == "Exit program":
         clear_terminal()
         print("\nThank you for visiting Pizza Truck\n")
@@ -67,286 +67,8 @@ def main_menu():
     file = open("intro.txt")
     INTRO_MESSAGE = file.read()
     file.close()
-
-    # type_write(INTRO_MESSAGE, 0.05)
+    type_write(INTRO_MESSAGE, 0.05)
     show_main_menu()
-
-
-# ORDER RELATED FUNCTIONS
-
-def show_order_options():
-    """
-    This functions displays order options
-    """
-    global current_order
-
-    menu_options = [
-        "Show menu",
-        "Add pizza",
-        "Main options"
-    ]
-
-    if len(current_order) != 0:
-        menu_options.insert(-1, "Remove pizza")
-        menu_options.insert(-1, "View current order")
-
-    action = menu_options[display_options(menu_options)-1]
-    if action == "Show menu":
-        clear_terminal()
-        show_menu()
-    elif action == "Add pizza":
-        clear_terminal()
-        current_order.extend(add_pizza(pizza_menu))
-        show_order_options()
-    elif action == "Remove pizza":
-        remove_pizza()
-        show_order_options()
-    elif action == "View current order":
-        clear_terminal()
-        display_current_order(retrieve_current_order())
-        show_main_menu()
-    elif action == "Main options":
-        clear_terminal()
-        show_main_menu()
-    else:
-        print("Action not recognized. Try again")
-
-
-def show_menu():
-    """
-    This function shows the available pizzas, with ingredients and price
-    """
-
-    print("\nMenu:\n")
-
-    menu = []
-
-    for pizza in pizza_menu:
-        row = []
-        number = pizza_menu.index(pizza) + 1
-        row.append(number)
-        row.append(pizza.name.capitalize())
-        row.append(pizza.ingredients())
-        row.append(pizza.price)
-        menu.append(row)
-
-    type_write(
-        tabulate(menu, headers=["#", "Name", "Ingredients", "Price/€"]),
-        0.000000001)
-
-    print("\n* + €1.5 per topping\n")
-
-    show_order_options()
-
-
-def show_menu_short():
-    """
-    This function shows the available pizzas only
-    """
-
-    print("\nMenu:\n")
-
-    for pizza in pizza_menu:
-        number = pizza_menu.index(pizza) + 1
-        menu = f"{number}- {pizza.name.capitalize()}\n"
-        type_write(menu, 0.001)
-
-
-def add_pizza(pizza_menu):
-    """
-    This function takes one integer as input from the user.
-    The integer needs to correspond to the pizza they want to order.
-    It adds the pizza to the crrent_order array.
-    """
-    add_to_order = []
-
-    show_menu_short()
-
-    print("\nEnter the number corresponding to the pizza")
-    print("Enter 0 (zero) to exit")
-
-    while True:
-        choosen_pizza = input("\nAdd pizza: ")
-        if choosen_pizza == "0":
-            clear_terminal()
-            print(f"\n{len(add_to_order)} pizzas added to your order")
-            break
-        elif validate_action(choosen_pizza, pizza_menu):
-            if (int(choosen_pizza) == len(pizza_menu)):
-                custom = make_custom_pizza()
-                add_to_order.append(custom)
-            else:
-                add_to_order.append(pizza_menu[int(choosen_pizza)-1])
-
-    order = []
-    for pizza in add_to_order:
-        item = {
-            "name": pizza.name,
-            "dough": pizza.dough,
-            "sauce": pizza.sauce,
-            "toppings": pizza.toppings,
-            "price": pizza.price
-        }
-        order.append(item)
-
-    return order
-
-
-def make_custom_pizza():
-    """
-    This function creates a new instance of the class pizza.
-    """
-    new_custom = copy.copy(custom)
-
-    dough = choose_dough()
-    sauce = choose_sauce()
-    toppings = choose_toppings()
-    price = update_price(toppings)
-
-    new_custom.dough = dough
-    new_custom.sauce = sauce
-    new_custom.toppings = toppings
-    new_custom.price = price
-
-    return new_custom
-
-
-def remove_pizza():
-    """
-    This functions removes selected item from current order
-    """
-    while True:
-        print("\nSelect the number of the pizza you want to remove")
-        print("\nEnter 0 to exit")
-        items = retrieve_current_order()
-
-        if len(items) == 0:
-            clear_terminal()
-            print("\n There are no items in the order")
-            break
-
-        for item in items:
-            ind = (items.index(item)) + 1
-            if item["ingredients"] != "":
-                print(f"""{ind}- {
-                    item['name']}{
-                    item['ingredients']} (X{item['count']})""")
-            else:
-                print(f"{ind}- {item['name']} (X{item['count']})")
-
-        choosen_pizza = input("\nRemove pizza: ")
-
-        if choosen_pizza == "0":
-            break
-        elif validate_action(choosen_pizza, current_order):
-            to_be_removed = (items[int(choosen_pizza)-1])['name']
-            for item in current_order:
-                if item['name'] == to_be_removed:
-                    current_order.remove(item)
-                    clear_terminal()
-                    break
-
-
-# BASKET AND CHECKOUT RELATED FUNCTIONS
-
-
-def retrieve_current_order():
-    """
-    This function displays the items currently added to the order.
-    """
-    items_count = []
-    types = []
-
-    for item in current_order:
-        if item not in types:
-            types.append(item)
-
-    for type in types:
-        num = current_order.count(type)
-        if (type["name"] == "make your own"):
-            ingredients = f"{type['dough'].capitalize()}, "
-            ingredients += f"{type['sauce'].capitalize()}"
-
-            selection = list(dict.fromkeys(type['toppings']))
-            for i in selection:
-                rep = type['toppings'].count(i)
-                if rep == 1:
-                    ingredients += f", {i.capitalize()}"
-                else:
-                    ingredients += f", {rep}x{i.capitalize()}"
-            items_count.append(
-                {
-                    "name": type['name'],
-                    "count": num,
-                    "ingredients": f"({ingredients})",
-                    "price": type['price']
-                }
-            )
-        else:
-            items_count.append(
-                {
-                    "name": type['name'],
-                    "count": num,
-                    "ingredients": "",
-                    "price": type['price']
-                }
-            )
-    return items_count
-
-
-def display_current_order(items_count):
-    """
-    This functions uses retrieve_current_order to get the pizzas in order
-     and displays them.
-    """
-    total_price = 0
-    recap_order = []
-
-    print("\nCurrent order:\n")
-
-    for item in items_count:
-        row = []
-        row.append(f"{item['count']} X")
-        if item["ingredients"] != "":
-            row.append(f"""{
-                item['count']} X {
-                item['name']} {
-                item['ingredients']}""")
-        else:
-            row.append(f"{item['count']} X {item['name'].capitalize()}")
-        price = (int(item['count']) * int(item['price']))
-        total_price += price
-        row.append(f"€{price}")
-        recap_order.append(row)
-
-    print(tabulate(recap_order, headers=["", "Item", "Price"]))
-    print(f"Total: €{total_price}")
-
-
-def display_receipt(items_count):
-    """
-    This functions shows the items price and total order.
-    It is called at the end of the flow, then the user places the order.
-    """
-    total_price = 0
-    recap_order = []
-
-    for item in items_count:
-        row = []
-        row.append(f"{item['count']} X")
-        row.append(item['name'].capitalize())
-        row.append(f"{item['count']} X {item['price']}")
-        total_price += (int(item['count']) * int(item['price']))
-        recap_order.append(row)
-
-    recap_order.append(["---", "----------", "----------"])
-    recap_order.append(["", "", f"Total: €{total_price}"])
-
-    type_write(
-        tabulate(recap_order, headers=["", "Name", "Price/€"]),
-        0.000000001)
-
-    print("\n\nThank you for your order")
 
 
 # MAIN
@@ -360,8 +82,7 @@ def main():
     file = open("logo.txt")
     logo = file.read()
     file.close()
-
-    # type_write(logo, 0.0000000000001)
+    type_write(logo, 0.0000000000001)
 
     main_menu()
 
