@@ -50,7 +50,7 @@ def show_main_menu():
         show_order_options()
     if action == "View current order":
         clear_terminal()
-        display_current_order()
+        display_current_order(retrieve_current_order())
         show_main_menu()
     if action == "Exit program":
         clear_terminal()
@@ -103,7 +103,7 @@ def show_order_options():
         show_order_options()
     elif action == "View current order":
         clear_terminal()
-        display_current_order()
+        display_current_order(retrieve_current_order())
         show_main_menu()
     elif action == "Main options":
         clear_terminal()
@@ -131,7 +131,7 @@ def show_menu():
         menu.append(row)
 
     type_write(
-        tabulate(menu, headers=["#", "Name", "Ingredients", "Price/ €"]),
+        tabulate(menu, headers=["#", "Name", "Ingredients", "Price/€"]),
         0.000000001)
 
     print("\n* + €1.5 per topping\n")
@@ -237,13 +237,14 @@ def remove_pizza():
 
 # BASKET AND CHECKOUT RELATED FUNCTIONS
 
-def display_current_order():
+def retrieve_current_order():
     """
     This function displays the items currently added to the order.
     """
     print("\nCurrent order:\n***************")
 
     order = []
+    items_count = []
 
     for pizza in current_order:
         item = {
@@ -269,11 +270,39 @@ def display_current_order():
 
             selection = list(dict.fromkeys(type['toppings']))
             for i in selection:
-                num = type['toppings'].count(i)
-                ingredients += f", {num}x{i.capitalize()}"
-            print(f"{num} X {type['name'].capitalize()} ({ingredients})")
+                rep = type['toppings'].count(i)
+                if rep == 1:
+                    ingredients += f", {i.capitalize()}"
+                else:
+                    ingredients += f", {rep}x{i.capitalize()}"
+            items_count.append(
+                {
+                    "name": type['name'],
+                    "count": num,
+                    "ingredients": f"({ingredients})"
+                }
+            )
         else:
-            print(f"{num} X {type['name'].capitalize()}")
+            items_count.append(
+                {
+                    "name": type['name'],
+                    "count": num,
+                    "ingredients": ""
+                }
+            )
+    return items_count
+
+
+def display_current_order(items_count):
+    """
+    This functions uses retrieve_current_order to get the pizzas in order
+     and displays them.
+    """
+    for item in items_count:
+        if item["ingredients"] != "":
+            print(f"{item['count']} X {item['name']} {item['ingredients']}")
+        else:
+            print(f"{item['count']} X {item['name'].capitalize()}")
 
 
 # MAIN

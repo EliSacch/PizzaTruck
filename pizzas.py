@@ -55,7 +55,7 @@ vegan = Pizza(
     "vegan",
     "wholegrain",
     "tomato",
-    ["vegan cheese", "mushrooms", "jackfruit"],
+    ["vegan cheese", "jackfruit"],
     10.00)
 
 
