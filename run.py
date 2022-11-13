@@ -22,7 +22,7 @@ def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def type_intro(message, speed):
+def type_write(message, speed):
     """
     This function takes a message as input and prints it one char at a time.
     It also takes the speed input to customize the typing speed.
@@ -67,7 +67,7 @@ def main_menu():
     INTRO_MESSAGE = file.read()
     file.close()
 
-    type_intro(INTRO_MESSAGE, 0.05)
+    # type_write(INTRO_MESSAGE, 0.05)
     show_main_menu()
 
 
@@ -116,11 +116,23 @@ def show_menu():
 
     print("\nMenu:\n")
 
-    for pizza in pizza_menu:
-        number = pizza_menu.index(pizza) + 1
-        menu = f"{number}- {pizza.description()}\n"
-        type_intro(menu, 0.001)
+    menu = []
 
+    for pizza in pizza_menu:
+        row = []
+        number = pizza_menu.index(pizza) + 1
+        row.append(number)
+        row.append(pizza.name.capitalize())
+        row.append(pizza.ingredients())
+        row.append(pizza.price)
+        menu.append(row)
+
+    type_write(
+        tabulate(menu, headers=["#", "Name", "Ingredients", "Price/ €"]),
+        0.000000001)
+    
+    print("\n")
+    
     show_order_options()
 
 
@@ -134,7 +146,7 @@ def show_menu_short():
     for pizza in pizza_menu:
         number = pizza_menu.index(pizza) + 1
         menu = f"{number}- {pizza.description()}\n"
-        type_intro(menu, 0.001)
+        type_write(menu, 0.001)
 
 
 def add_pizza(pizza_menu):
@@ -237,11 +249,13 @@ def main():
     """
     This function runs the progam.
     """
+    clear_terminal()
+
     file = open("logo.txt")
     logo = file.read()
     file.close()
 
-    # type_intro(logo, 0.0000000000001)
+    # type_write(logo, 0.0000000000001)
 
     main_menu()
 

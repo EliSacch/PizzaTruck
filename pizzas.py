@@ -28,6 +28,20 @@ class Pizza:
 
         return f"{name} {ingredients}"
 
+    def ingredients(self):
+        ingredients = ""
+        if self.dough != "":
+            ingredients += f"{self.dough.capitalize()} dough"
+        if self.sauce != "":
+            ingredients += f", {self.sauce.capitalize()} sauce"
+        if len(self.toppings) != 0:
+            for item in self.toppings:
+                ingredients += f", {item.capitalize()}"
+        if ingredients == "":
+            ingredients = f"Choose your own (max 4 toppinga)"
+
+        return f"{ingredients}"
+
 
 margherita = Pizza(
     "margerita",
