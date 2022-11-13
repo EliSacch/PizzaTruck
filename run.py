@@ -178,7 +178,18 @@ def add_pizza(pizza_menu):
             else:
                 add_to_order.append(pizza_menu[int(choosen_pizza)-1])
 
-    return add_to_order
+    order = []
+    for pizza in add_to_order:
+        item = {
+            "name": pizza.name,
+            "dough": pizza.dough,
+            "sauce": pizza.sauce,
+            "toppings": pizza.toppings,
+            "price": pizza.price
+        }
+        order.append(item)
+
+    return order
 
 
 def make_custom_pizza():
@@ -207,35 +218,48 @@ def remove_pizza():
 
     print("\nSelect the number corresponding to the pizza you want to remove")
     print("\nEnter 0 to exit")
-
+    """
     while True:
-        order_items = []
-        items_count = []
-        print("\nCurrent order:\n***************")
-        for type in pizza_menu:
-            num = current_order.count(type)
-            if num == 0:
-                pass
+        items = retrieve_current_order()
+        for item in items:
+            ind = (items.index(item)) + 1
+            if item["ingredients"] != "":
+                print(f""{ind}- {item['name']}
+                 {item['ingredients']} (X{item['count']})"")
             else:
-                order_items.append(type.name)
-                items_count.append(num)
-
-        for item, count in zip(order_items, items_count):
-            ind = (order_items.index(item)) + 1
-            print(f"{ind}- {item} (X{count})")
+                print(f"{ind}- {item['name']} (X{item['count']})")
 
         choosen_pizza = input("\nRemove pizza: ")
         if choosen_pizza == "0":
             break
         elif validate_action(choosen_pizza, current_order):
-            to_be_removed = order_items[int(choosen_pizza)-1]
+            to_be_removed = items[int(choosen_pizza)-1]
+            current_order.remove(to_be_removed)
+    """
+    while True:
+        items = retrieve_current_order()
+        for item in items:
+            ind = (items.index(item)) + 1
+            if item["ingredients"] != "":
+                print(f"""{ind}- {item['name']}
+                 {item['ingredients']} (X{item['count']})""")
+            else:
+                print(f"{ind}- {item['name']} (X{item['count']})")
+
+        choosen_pizza = input("\nRemove pizza: ")
+
+        if choosen_pizza == "0":
+            break
+        elif validate_action(choosen_pizza, current_order):
+            to_be_removed = (items[int(choosen_pizza)-1])['name']
             for item in current_order:
-                if item.name == to_be_removed:
+                if item['name'] == to_be_removed:
                     current_order.remove(item)
                     break
 
 
 # BASKET AND CHECKOUT RELATED FUNCTIONS
+
 
 def retrieve_current_order():
     """
@@ -243,27 +267,15 @@ def retrieve_current_order():
     """
     print("\nCurrent order:\n***************")
 
-    order = []
     items_count = []
-
-    for pizza in current_order:
-        item = {
-            "name": pizza.name,
-            "dough": pizza.dough,
-            "sauce": pizza.sauce,
-            "toppings": pizza.toppings,
-            "price": pizza.price
-        }
-        order.append(item)
-
     types = []
 
-    for item in order:
+    for item in current_order:
         if item not in types:
             types.append(item)
 
     for type in types:
-        num = order.count(type)
+        num = current_order.count(type)
         if (type["name"] == "make your own"):
             ingredients = f"{type['dough'].capitalize()}, "
             ingredients += f"{type['sauce'].capitalize()}"
