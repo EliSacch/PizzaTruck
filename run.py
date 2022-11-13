@@ -50,7 +50,7 @@ def show_main_menu():
         show_order_options()
     if action == "View current order":
         clear_terminal()
-        display_current_order(retrieve_current_order())
+        display_receipt(retrieve_current_order())
         show_main_menu()
     if action == "Exit program":
         clear_terminal()
@@ -254,8 +254,6 @@ def retrieve_current_order():
     """
     This function displays the items currently added to the order.
     """
-    print("\nCurrent order:\n***************")
-
     items_count = []
     types = []
 
@@ -302,15 +300,53 @@ def display_current_order(items_count):
      and displays them.
     """
     total_price = 0
+    recap_order = []
+
+    print("\nCurrent order:\n")
 
     for item in items_count:
+        row = []
+        row.append(f"{item['count']} X")
         if item["ingredients"] != "":
-            print(f"{item['count']} X {item['name']} {item['ingredients']}")
+            row.append(f"""{
+                item['count']} X {
+                item['name']} {
+                item['ingredients']}""")
         else:
-            print(f"{item['count']} X {item['name'].capitalize()}")
-        print(f"{item['count']} X {item['price']}")
-        total_price += (int(item['count']) * int(item['price']))
+            row.append(f"{item['count']} X {item['name'].capitalize()}")
+        price = (int(item['count']) * int(item['price']))
+        total_price += price
+        row.append(f"€{price}")
+        recap_order.append(row)
+
+    print(tabulate(recap_order, headers=["", "Item", "Price"]))
     print(f"Total: €{total_price}")
+
+
+def display_receipt(items_count):
+    """
+    This functions shows the items price and total order.
+    It is called at the end of the flow, then the user places the order.
+    """
+    total_price = 0
+    recap_order = []
+
+    for item in items_count:
+        row = []
+        row.append(f"{item['count']} X")
+        row.append(item['name'].capitalize())
+        row.append(f"{item['count']} X {item['price']}")
+        total_price += (int(item['count']) * int(item['price']))
+        recap_order.append(row)
+
+    recap_order.append(["---", "----------", "----------"])
+    recap_order.append(["", "", f"Total: €{total_price}"])
+
+    type_write(
+        tabulate(recap_order, headers=["", "Name", "Price/€"]),
+        0.000000001)
+
+    print("\n\nThank you for your order")
 
 
 # MAIN
