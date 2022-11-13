@@ -1,12 +1,13 @@
-# BASKET AND CHECKOUT RELATED FUNCTIONS
+from general import current_order
+from general import show_main_menu
+from general import type_write
+from general import clear_terminal
 from tabulate import tabulate
-from run import clear_terminal
-from run import type_write
-from run import show_main_menu
-from run import current_order
 from display_options import *
 from order import show_order_options
 
+
+# BASKET AND CHECKOUT RELATED FUNCTIONS
 
 def show_basket_menu():
     """
