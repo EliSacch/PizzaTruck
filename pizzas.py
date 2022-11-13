@@ -86,6 +86,8 @@ custom = Pizza(
 pizza_menu = [margherita, vegan, spicy, truffle, custom]
 
 
+# CUSTOM PIZZA FUNCTIONS
+
 def choose_dough():
     """
     This function updates the dough attrobute of custom pizza
@@ -122,6 +124,21 @@ def choose_toppings():
     """
     This function updates the toppings attrobute of custom pizza
     """
+    options = [
+        "Mozzarella",
+        "Scamorza",
+        "Vegan cheese",
+        "Mushrooms",
+        "Jackfruit",
+        "pepperoni",
+        "Black Truffle",
+        "Cherry tomatoes",
+        "Peppers"
+    ]
+
+    toppings = display_toppings_options(options, "toppings")
+
+    return toppings
 
 
 def update_price(toppings):
