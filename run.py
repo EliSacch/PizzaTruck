@@ -1,10 +1,25 @@
+from tabulate import tabulate
 import sys
 import time
+import os
+from validation import *
+from display_option import *
 from pizzas import *
+
+
+# VARIABLES
+
+current_order = []
+
 
 # GENERAL FUNCTIONS
 
-current_order = []
+
+def clear_terminal():
+    """
+    This functions clears the terminal.
+    """
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def type_intro(message, speed):
@@ -30,11 +45,14 @@ def show_main_menu():
 
     action = menu_options[display_options(menu_options)-1]
     if action == "Menu and Order":
+        clear_terminal()
         show_order_options()
     if action == "View current order":
+        clear_terminal()
         display_current_order()
         show_main_menu()
     if action == "Exit program":
+        clear_terminal()
         print("\nThank you for visiting Pizza Truck\n")
         exit()
 
@@ -49,44 +67,8 @@ def main_menu():
     INTRO_MESSAGE = file.read()
     file.close()
 
-    # type_intro(INTRO_MESSAGE, 0.05)
+    type_intro(INTRO_MESSAGE, 0.05)
     show_main_menu()
-
-
-def display_options(options):
-    """
-    This function displays the options for the related section.
-    """
-    while True:
-        print("\nOptions:\n")
-        for option in options:
-            prefix = options.index(option) + 1
-            print(f"{prefix}. {option}")
-        choosen_action = input("\nChoose an action(enter the action number): ")
-        if validate_action(choosen_action, options):
-            break
-
-    return int(choosen_action)
-
-
-def validate_action(value, choices):
-    """
-    Inside the try, converts all string values into integers.
-    Raises ValueError if strings cannot be converted into int,
-    or if it is outside of the range of choices.
-    """
-    try:
-        if value.isnumeric() is False:
-            raise ValueError('Please, enter a whole number')
-        action = int(value)-1
-        is_valid_choice = action >= 0 and action < len(choices)
-        if is_valid_choice is False:
-            raise IndexError("No option corresponding to this number")
-    except (ValueError, IndexError) as e:
-        print(f"\nInvalid data: {e}. Please try again.")
-        return False
-
-    return True
 
 
 # ORDER RELATED FUNCTIONS
@@ -109,8 +91,10 @@ def show_order_options():
 
     action = menu_options[display_options(menu_options)-1]
     if action == "Show menu":
+        clear_terminal()
         show_menu()
     elif action == "Add pizza":
+        clear_terminal()
         current_order.extend(add_pizza(pizza_menu))
         show_order_options()
     elif action == "Remove pizza":
@@ -127,7 +111,7 @@ def show_order_options():
 
 def show_menu():
     """
-    This function shows the available pizzas
+    This function shows the available pizzas, with ingredients and price
     """
 
     print("\nMenu:\n")
@@ -138,6 +122,19 @@ def show_menu():
         type_intro(menu, 0.001)
 
     show_order_options()
+
+
+def show_menu_short():
+    """
+    This function shows the available pizzas only
+    """
+
+    print("\nMenu:\n")
+
+    for pizza in pizza_menu:
+        number = pizza_menu.index(pizza) + 1
+        menu = f"{number}- {pizza.description()}\n"
+        type_intro(menu, 0.001)
 
 
 def add_pizza(pizza_menu):
@@ -157,7 +154,7 @@ def add_pizza(pizza_menu):
             print(f"\n{len(add_to_order)} pizzas added to your order")
             break
         elif validate_action(choosen_pizza, pizza_menu):
-            if (int(choosen_pizza) == len(pizza_menu) - 1):
+            if (int(choosen_pizza) == len(pizza_menu)):
                 add_to_order.append(make_custom_pizza())
             else:
                 add_to_order.append(pizza_menu[int(choosen_pizza)-1])
@@ -175,6 +172,11 @@ def make_custom_pizza():
         "test",
         [],
         8.00)
+
+    new_custom.dough = choose_dough()
+    new_custom.sauce = choose_sauce()
+    new_custom.toppings = choose_toppings()
+    new_custom.price = update_price()
 
     return new_custom
 
