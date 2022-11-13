@@ -145,3 +145,7 @@ def update_price(toppings):
     """
     This function updates the price attrobute of custom pizza
     """
+    count = len(toppings)
+    price = 8 + (1.5 * count)
+
+    return price

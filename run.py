@@ -201,12 +201,12 @@ def make_custom_pizza():
     dough = choose_dough()
     sauce = choose_sauce()
     toppings = choose_toppings()
-    # price = update_price(toppings)
+    price = update_price(toppings)
 
     new_custom.dough = dough
     new_custom.sauce = sauce
     new_custom.toppings = toppings
-    # new_custom.price = price
+    new_custom.price = price
 
     return new_custom
 
@@ -280,7 +280,8 @@ def retrieve_current_order():
                 {
                     "name": type['name'],
                     "count": num,
-                    "ingredients": f"({ingredients})"
+                    "ingredients": f"({ingredients})",
+                    "price": type['price']
                 }
             )
         else:
@@ -288,7 +289,8 @@ def retrieve_current_order():
                 {
                     "name": type['name'],
                     "count": num,
-                    "ingredients": ""
+                    "ingredients": "",
+                    "price": type['price']
                 }
             )
     return items_count
@@ -299,11 +301,16 @@ def display_current_order(items_count):
     This functions uses retrieve_current_order to get the pizzas in order
      and displays them.
     """
+    total_price = 0
+
     for item in items_count:
         if item["ingredients"] != "":
             print(f"{item['count']} X {item['name']} {item['ingredients']}")
         else:
             print(f"{item['count']} X {item['name'].capitalize()}")
+        print(f"{item['count']} X {item['price']}")
+        total_price += (int(item['count']) * int(item['price']))
+    print(f"Total: €{total_price}")
 
 
 # MAIN
