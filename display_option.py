@@ -42,6 +42,7 @@ def display_toppings_options(options, category):
     it has been changed to display the options just once.
     """
     print(f"\nChoice of {category}: \n")
+    print("\n0. No more toppings")
     for option in options:
         prefix = options.index(option) + 1
         print(f"{prefix}. {option}")
@@ -52,7 +53,9 @@ def display_toppings_options(options, category):
     while (count < limit):
         print(f"\n{count} of {limit} toppings added.")
         choosen_option = input(f"\nChoose {category}: ")
-        if validate_action(choosen_option, options):
+        if (int(choosen_option) == 0):
+            break
+        elif validate_action(choosen_option, options):
             toppings_choice.append(options[int(choosen_option)-1])
             count += 1
 
