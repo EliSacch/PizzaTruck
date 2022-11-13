@@ -147,6 +147,15 @@ To develop a program that answers all the needs identified above, I have created
     ![Fix](media/display-order-fix.png)
 
     </details>
+    This fix was showing the custom pizzas, although they were still separate objects, so custom pizzas with same ingredients were actually displayed separately.
+
+    To improve this functionality I wanted to display custom pizzas with same ingredients in the same line. To accomplish this result I created a new list of dictionaries, one for each pizza in the order, and than counted their recurrency.
+    <details>
+    <summary>See improved fix screenshot</summary>
+    
+    ![Fix](media/display-order-fix-improved.png)
+
+    </details>
 
 
 ### Unfixed Bugs

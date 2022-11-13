@@ -2,6 +2,7 @@ from tabulate import tabulate
 import sys
 import time
 import os
+import copy
 from validation import *
 from display_option import *
 from pizzas import *
@@ -184,12 +185,7 @@ def make_custom_pizza():
     """
     This function creates a new instance of the class pizza.
     """
-    new_custom = Pizza(
-        "make your own",
-        "test",
-        "test",
-        ["test"],
-        8.00)
+    new_custom = copy.copy(custom)
 
     dough = choose_dough()
     # sauce = choose_sauce()
@@ -247,15 +243,35 @@ def display_current_order():
     """
     print("\nCurrent order:\n***************")
 
-    for type in pizza_menu:
-        num = current_order.count(type)
-        if num == 0:
-            pass
+    order = []
+
+    for pizza in current_order:
+        item = {
+            "name": pizza.name,
+            "dough": pizza.dough,
+            "sauce": pizza.sauce,
+            "toppings": pizza.toppings,
+            "price": pizza.price
+        }
+        order.append(item)
+
+    types = []
+
+    for item in order:
+        if item not in types:
+            types.append(item)
+
+    for type in types:
+        num = order.count(type)
+        if (type["name"] == "make your own"):
+            ingredients = f"{type['dough'].capitalize()}, "
+            ingredients += f"{type['sauce'].capitalize()}"
+            for ingredient in type['toppings']:
+                ingredients += f", {ingredient.capitalize()}"
+
+            print(f"{num} X {type['name'].capitalize()} ({ingredients})")
         else:
-            print(f"{num} X {type.name.capitalize()}")
-    for custom in current_order:
-        if custom.name == "make your own":
-            print(f"1 X {custom.description()}")
+            print(f"{num} X {type['name'].capitalize()}")
 
 
 # MAIN
