@@ -266,9 +266,11 @@ def display_current_order():
         if (type["name"] == "make your own"):
             ingredients = f"{type['dough'].capitalize()}, "
             ingredients += f"{type['sauce'].capitalize()}"
-            for ingredient in type['toppings']:
-                ingredients += f", {ingredient.capitalize()}"
 
+            selection = list(dict.fromkeys(type['toppings']))
+            for i in selection:
+                num = type['toppings'].count(i)
+                ingredients += f", {num}x{i.capitalize()}"
             print(f"{num} X {type['name'].capitalize()} ({ingredients})")
         else:
             print(f"{num} X {type['name'].capitalize()}")

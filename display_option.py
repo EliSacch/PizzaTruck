@@ -49,9 +49,17 @@ def display_toppings_options(options, category):
     toppings_choice = []
     limit = 4
     for i in range(limit):
+        print(f"\n{i} of {limit} toppings added.")
         choosen_option = input(f"\nChoose {category}: ")
         if validate_action(choosen_option, options):
             toppings_choice.append(options[int(choosen_option)-1])
         i += 1
+
+    print("\nYou choose the following toppings: ")
+
+    selection = list(dict.fromkeys(toppings_choice))
+    for i in selection:
+        num = toppings_choice.count(i)
+        print(f"{num} X {i}")
 
     return toppings_choice
