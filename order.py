@@ -101,7 +101,7 @@ def add_pizza(pizza_menu):
     print("Enter 0 (zero) to exit")
 
     while True:
-        choosen_pizza = input("\nAdd pizza: ")
+        choosen_pizza = input("\nAdd pizza:\n")
         if choosen_pizza == "0":
             clear_terminal()
             print(f"\n{len(add_to_order)} pizzas added to your order")
@@ -150,7 +150,7 @@ def remove_pizza():
             else:
                 print(f"{ind}- {item['name']} (X{item['count']})")
 
-        choosen_pizza = input("\nRemove pizza: ")
+        choosen_pizza = input("\nRemove pizza:\n")
 
         if choosen_pizza == "0":
             break

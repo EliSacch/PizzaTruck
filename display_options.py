@@ -28,7 +28,7 @@ def display_ingredients_options(options, category):
         for option in options:
             prefix = options.index(option) + 1
             print(f"{prefix}. {option}")
-        choosen_option = input(f"\nChoose {category}: ")
+        choosen_option = input(f"\nChoose {category}:\n")
         if validate_action(choosen_option, options):
             break
 
@@ -52,7 +52,7 @@ def display_toppings_options(options, category):
     count = 0
     while (count < limit):
         print(f"\n{count} of {limit} toppings added.")
-        choosen_option = input(f"\nChoose {category}: ")
+        choosen_option = input(f"\nChoose {category}:\n")
         if (int(choosen_option) == 0):
             break
         elif validate_action(choosen_option, options):
