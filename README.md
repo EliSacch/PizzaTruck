@@ -157,6 +157,23 @@ To develop a program that answers all the needs identified above, I have created
 
     </details>
 
+- __Choose_toppings counting invalid input__ 
+
+  When choosing the toppings for the custom pizza there is a limit of 4 ingredients, but the function was increasing the count also when an invalid input was entered.
+    <details>
+    <summary>See bug screenshot</summary>
+    
+    ![Bug](media/choose-toppings-bug.png)
+
+    </details>
+    To fix this bug I change the type of iteration, and choose a while loop.
+    <details>
+    <summary>See fix screenshot</summary>
+    
+    ![Fix](media/choose-toppings-fix.png)
+
+    </details>
+
 
 ### Unfixed Bugs
 
