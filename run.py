@@ -83,11 +83,11 @@ def show_order_options():
     menu_options = [
         "Show menu",
         "Add pizza",
-        "Remove pizza",
         "Main options"
     ]
 
     if len(current_order) != 0:
+        menu_options.insert(-1, "Remove pizza")
         menu_options.insert(-1, "View current order")
 
     action = menu_options[display_options(menu_options)-1]
@@ -215,34 +215,22 @@ def remove_pizza():
     """
     This functions removes selected item from current order
     """
-
-    print("\nSelect the number corresponding to the pizza you want to remove")
-    print("\nEnter 0 to exit")
-    """
     while True:
+        print("\nSelect the number of the pizza you want to remove")
+        print("\nEnter 0 to exit")
         items = retrieve_current_order()
-        for item in items:
-            ind = (items.index(item)) + 1
-            if item["ingredients"] != "":
-                print(f""{ind}- {item['name']}
-                 {item['ingredients']} (X{item['count']})"")
-            else:
-                print(f"{ind}- {item['name']} (X{item['count']})")
 
-        choosen_pizza = input("\nRemove pizza: ")
-        if choosen_pizza == "0":
+        if len(items) == 0:
+            clear_terminal()
+            print("\n There are no items in the order")
             break
-        elif validate_action(choosen_pizza, current_order):
-            to_be_removed = items[int(choosen_pizza)-1]
-            current_order.remove(to_be_removed)
-    """
-    while True:
-        items = retrieve_current_order()
+
         for item in items:
             ind = (items.index(item)) + 1
             if item["ingredients"] != "":
-                print(f"""{ind}- {item['name']}
-                 {item['ingredients']} (X{item['count']})""")
+                print(f"""{ind}- {
+                    item['name']}{
+                    item['ingredients']} (X{item['count']})""")
             else:
                 print(f"{ind}- {item['name']} (X{item['count']})")
 
@@ -255,6 +243,7 @@ def remove_pizza():
             for item in current_order:
                 if item['name'] == to_be_removed:
                     current_order.remove(item)
+                    clear_terminal()
                     break
 
 

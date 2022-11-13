@@ -48,12 +48,13 @@ def display_toppings_options(options, category):
 
     toppings_choice = []
     limit = 4
-    for i in range(limit):
-        print(f"\n{i} of {limit} toppings added.")
+    count = 0
+    while (count < limit):
+        print(f"\n{count} of {limit} toppings added.")
         choosen_option = input(f"\nChoose {category}: ")
         if validate_action(choosen_option, options):
             toppings_choice.append(options[int(choosen_option)-1])
-        i += 1
+            count += 1
 
     print("\nYou choose the following toppings: ")
 
