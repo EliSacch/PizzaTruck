@@ -188,12 +188,12 @@ def make_custom_pizza():
     new_custom = copy.copy(custom)
 
     dough = choose_dough()
-    # sauce = choose_sauce()
+    sauce = choose_sauce()
     # toppings = choose_toppings()
-    # price = update_price()
+    # price = update_price(toppings)
 
     new_custom.dough = dough
-    # new_custom.sauce = sauce
+    new_custom.sauce = sauce
     # new_custom.toppings = toppings
     # new_custom.price = price
 

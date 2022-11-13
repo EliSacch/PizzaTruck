@@ -91,14 +91,14 @@ def choose_dough():
     This function updates the dough attrobute of custom pizza
     """
     options = [
-        "white",
-        "wholegarain",
-        "gluten free"
+        "White",
+        "Wholegarain",
+        "Gluten free"
     ]
 
     dough = display_ingredients_options(options, "dough")
 
-    if validate_action(dough, pizza_menu):
+    if validate_action(dough, options):
         return options[int(dough)-1]
 
 
@@ -106,6 +106,16 @@ def choose_sauce():
     """
     This function updates the sauce attrobute of custom pizza
     """
+    options = [
+        "Tomato sauce",
+        "BBQ sauce",
+        "No sauce"
+    ]
+
+    sauce = display_ingredients_options(options, "sauce")
+
+    if validate_action(sauce, options):
+        return options[int(sauce)-1]
 
 
 def choose_toppings():
@@ -114,7 +124,7 @@ def choose_toppings():
     """
 
 
-def update_price():
+def update_price(toppings):
     """
     This function updates the price attrobute of custom pizza
     """
