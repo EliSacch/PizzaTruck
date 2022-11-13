@@ -80,7 +80,7 @@ custom = Pizza(
     "",
     "",
     [],
-    8.00)
+    "8.0*")
 
 
 pizza_menu = [margherita, vegan, spicy, truffle, custom]
@@ -96,12 +96,10 @@ def choose_dough():
         "gluten free"
     ]
 
-    display_options(options)
-
-    dough = input("\nChoice of dough: ")
+    dough = display_ingredients_options(options, "dough")
 
     if validate_action(dough, pizza_menu):
-        print(options[int(dough)-1])
+        return options[int(dough)-1]
 
 
 def choose_sauce():

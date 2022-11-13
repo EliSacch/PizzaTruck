@@ -101,9 +101,11 @@ def show_order_options():
         remove_pizza()
         show_order_options()
     elif action == "View current order":
+        clear_terminal()
         display_current_order()
         show_main_menu()
     elif action == "Main options":
+        clear_terminal()
         show_main_menu()
     else:
         print("Action not recognized. Try again")
@@ -130,9 +132,9 @@ def show_menu():
     type_write(
         tabulate(menu, headers=["#", "Name", "Ingredients", "Price/ €"]),
         0.000000001)
-    
-    print("\n")
-    
+
+    print("\n* + €1.5 per topping\n")
+
     show_order_options()
 
 
@@ -145,7 +147,7 @@ def show_menu_short():
 
     for pizza in pizza_menu:
         number = pizza_menu.index(pizza) + 1
-        menu = f"{number}- {pizza.description()}\n"
+        menu = f"{number}- {pizza.name.capitalize()}\n"
         type_write(menu, 0.001)
 
 
@@ -157,17 +159,21 @@ def add_pizza(pizza_menu):
     """
     add_to_order = []
 
+    show_menu_short()
+
     print("\nEnter the number corresponding to the pizza")
     print("Enter 0 (zero) to exit")
 
     while True:
         choosen_pizza = input("\nAdd pizza: ")
         if choosen_pizza == "0":
+            clear_terminal()
             print(f"\n{len(add_to_order)} pizzas added to your order")
             break
         elif validate_action(choosen_pizza, pizza_menu):
             if (int(choosen_pizza) == len(pizza_menu)):
-                add_to_order.append(make_custom_pizza())
+                custom = make_custom_pizza()
+                add_to_order.append(custom)
             else:
                 add_to_order.append(pizza_menu[int(choosen_pizza)-1])
 
@@ -176,19 +182,24 @@ def add_pizza(pizza_menu):
 
 def make_custom_pizza():
     """
-    This function creates a new instance of the class pizza
+    This function creates a new instance of the class pizza.
     """
     new_custom = Pizza(
         "make your own",
         "test",
         "test",
-        [],
+        ["test"],
         8.00)
 
-    new_custom.dough = choose_dough()
-    new_custom.sauce = choose_sauce()
-    new_custom.toppings = choose_toppings()
-    new_custom.price = update_price()
+    dough = choose_dough()
+    # sauce = choose_sauce()
+    # toppings = choose_toppings()
+    # price = update_price()
+
+    new_custom.dough = dough
+    # new_custom.sauce = sauce
+    # new_custom.toppings = toppings
+    # new_custom.price = price
 
     return new_custom
 
@@ -235,12 +246,16 @@ def display_current_order():
     This function displays the items currently added to the order.
     """
     print("\nCurrent order:\n***************")
+
     for type in pizza_menu:
         num = current_order.count(type)
         if num == 0:
             pass
         else:
-            print(f"{num} X {type.name}")
+            print(f"{num} X {type.name.capitalize()}")
+    for custom in current_order:
+        if custom.name == "make your own":
+            print(f"1 X {custom.description()}")
 
 
 # MAIN
