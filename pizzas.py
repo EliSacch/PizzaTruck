@@ -34,7 +34,7 @@ class Pizza:
             for item in self.toppings:
                 ingredients += f", {item.capitalize()}"
         if ingredients == "":
-            ingredients = f"Choose your own (max 4 toppinga)"
+            ingredients = f"Choose your own (max 4 toppings)"
 
         return f"{ingredients}"
 

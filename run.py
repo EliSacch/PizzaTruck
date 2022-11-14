@@ -3,6 +3,7 @@ import time
 import os
 import copy
 from tabulate import tabulate
+import textwrap
 from validation import *
 from pizzas import *
 
@@ -26,12 +27,12 @@ def type_write(message, speed):
     This function takes a message as input and prints it one char at a time.
     It also takes the speed input to customize the typing speed.
     """
-# The following code is from Learn Learn Scratch Tutorials
+    # The following code is from Learn Learn Scratch Tutorials
     for char in message:
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(speed)
-# End of code from Learn Learn Scratch Tutorials
+    # End of code from Learn Learn Scratch Tutorials
 
 
 def show_main_menu():
@@ -379,7 +380,9 @@ def show_basket_menu():
 
 def retrieve_current_order():
     """
-    This function displays the items currently added to the order.
+    This function retrieves the items currently added to the order.
+    It returns the relevant information the be used the display ord functions.
+    It also return the count for each item.
     """
     items_count = []
     types = []
@@ -424,7 +427,7 @@ def retrieve_current_order():
 def display_current_order(items_count):
     """
     This functions uses retrieve_current_order to get the pizzas in order
-     and displays them.
+    and displays them.
     """
     total_price = 0
     recap_order = []
@@ -434,25 +437,24 @@ def display_current_order(items_count):
     for item in items_count:
         row = []
         row.append(f"{item['count']} X")
-        if item["ingredients"] != "":
-            row.append(f"""{
-                item['name']} {
-                item['ingredients']}""")
-        else:
-            row.append(f"{item['name'].capitalize()}")
+        row.append(f"{item['name'].capitalize()}")
         price = (float(item['count']) * float(item['price']))
         total_price += price
         row.append(f"€{price}")
         recap_order.append(row)
+        if item["ingredients"] != "":
+            recap_order.append(["", f"{item['ingredients']}", ""])
 
-    print(tabulate(recap_order, headers=["", "Item", "Price"]))
+    header = ["", "Item", "Price"]
+    width = [None, 50, None]
+    print(tabulate(recap_order, headers=header, maxcolwidths=width))
     print(f"Total: €{total_price}")
 
 
 def display_receipt(items_count):
     """
-    This functions shows the items price and total order.
-    It is called at the end of the flow, then the user places the order.
+    This functions shows the final order and total price.
+    It is called at the end of the flow, when the order is placed.
     """
     total_price = 0
     recap_order = []
