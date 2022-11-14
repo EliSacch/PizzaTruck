@@ -364,7 +364,7 @@ def show_basket_menu():
     Displays the options available in the basket section
     """
     menu_options = ["Edit Order", "Place order", "Main menu"]
-    action = menu_options[display_options(menu_options, "option")-1]
+    action = menu_options[int(display_options(menu_options, "option"))-1]
     if action == "Edit Order":
         clear_terminal()
         show_order_options()
