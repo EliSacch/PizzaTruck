@@ -19,7 +19,9 @@ def clear_terminal():
     """
     This functions clears the terminal.
     """
+    # The following code is from stackoverflow
     os.system('cls' if os.name == 'nt' else 'clear')
+    # End of code from stackoverflow
 
 
 def type_write(message, speed):

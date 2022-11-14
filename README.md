@@ -206,6 +206,8 @@ To develop a program that answers all the needs identified above, I have created
 
 - The code to display the intro message as typwriter was taken from the [Learn Learn Scratch Tutorial](https://www.youtube.com/watch?v=2h8e0tXHfk0)
 
+- The code to clear the terminal was taken from the following article on [Stackoverflow](https://stackoverflow.com/questions/2084508/clear-terminal-in-python)
+
 
 ### Content
 
