@@ -1,9 +1,9 @@
 import sys
 import time
+from time import sleep
 import os
 import copy
 from tabulate import tabulate
-import textwrap
 from validation import *
 from pizzas import *
 
@@ -372,7 +372,7 @@ def show_basket_menu():
     if action == "Place order":
         clear_terminal()
         display_receipt(retrieve_current_order())
-        exit()
+        terminate_program()
     if action == "Main menu":
         clear_terminal()
         show_main_menu()
@@ -474,7 +474,21 @@ def display_receipt(items_count):
         tabulate(recap_order, headers=["", "Name", "Price/€"]),
         0.000000001)
 
-    print("\n\nThank you for your order")
+
+# TERMINATE
+
+def terminate_program():
+    """
+    This function is called only at the end of the program.
+    It prints a goodbye message and then exits the progra.
+    """
+    input("\nPress any key to exit:\n")
+
+    thanks = "Thank you for your order!"
+
+    type_write(thanks, 0.0000000000001)
+    sleep(5)
+    quit()
 
 
 # MAIN
