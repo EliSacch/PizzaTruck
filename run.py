@@ -308,7 +308,9 @@ def choose_dough():
     dough = display_options(options, "dough")
 
     if validate_action(dough, options):
-        return options[int(dough)-1]
+        choice = options[int(dough)-1]
+        print(f"You choose the following dough: {choice}")
+        return choice
 
 
 def choose_sauce():
@@ -324,7 +326,9 @@ def choose_sauce():
     sauce = display_options(options, "sauce")
 
     if validate_action(sauce, options):
-        return options[int(sauce)-1]
+        choice = options[int(sauce)-1]
+        print(f"You choose the following sauce: {choice}")
+        return choice
 
 
 def choose_toppings():
@@ -350,7 +354,7 @@ def choose_toppings():
 
 def update_price(toppings):
     """
-    This function updates the price attrobute of custom pizza
+    This function updates the price attribute of custom pizza
     """
     count = len(toppings)
     price = 8 + (1.5 * count)
@@ -488,7 +492,7 @@ def terminate_program():
 
     type_write(thanks, 0.0000000000001)
     sleep(5)
-    quit()
+    exit()
 
 
 # MAIN
