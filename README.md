@@ -1,6 +1,11 @@
 # Pizza Truck
 
 Pizza Truck is an Order Management System for a pizza restaurant.
+It runs on a mock terminal deployed to Heroku.
+
+The purpose of this program is to manage the user ordering process from beginnng to end. It uses the input provided by the user to build the order and manipulate the data accordingly.
+
+[Link to live site](https://pizza-truck.herokuapp.com/)
 
 
 ## Table of content
@@ -34,11 +39,10 @@ Pizza Truck is an Order Management System for a pizza restaurant.
 ## Design and User Experience
 
 
-
 ### User Stories
-- As a restaurant owner I want that:
+- As a restaurant owner I want:
     - A system that helps me manage the orders.
-    - All the options in the menu are displayed to the users.
+    - That all the options on the menu are displayed to the users.
     - Users cannot order something that is not in the displayed options.
     - The order price is calclated correctly.
 

@@ -80,7 +80,10 @@ def display_options(options, category):
     the relevant ingredient category.
     """
     while True:
-        print(f"\nChoice of {category}: \n")
+        if category == "option":
+            print("\n ************\n")
+        else:
+            print(f"\nChoice of {category}: \n")
         for option in options:
             prefix = options.index(option) + 1
             print(f"{prefix}. {option}")
@@ -193,10 +196,11 @@ def show_menu_short():
     """
 
     print("\nMenu:\n")
+    print("0. Exit")
 
     for pizza in pizza_menu:
         number = pizza_menu.index(pizza) + 1
-        menu = f"{number}- {pizza.name.capitalize()}\n"
+        menu = f"{number}. {pizza.name.capitalize()}\n"
         type_write(menu, 0.001)
 
 
@@ -211,7 +215,7 @@ def add_pizza(pizza_menu):
     show_menu_short()
 
     print("\nEnter the number corresponding to the pizza")
-    print("Enter 0 (zero) to exit")
+    print("\nEnter 0 (zero) to exit")
 
     while True:
         choosen_pizza = input("\nAdd pizza:\n")
@@ -246,7 +250,7 @@ def remove_pizza():
     """
     while True:
         print("\nSelect the number of the pizza you want to remove")
-        print("\nEnter 0 to exit")
+        print("\n0. Exit")
         items = retrieve_current_order()
 
         if len(items) == 0:
@@ -257,11 +261,11 @@ def remove_pizza():
         for item in items:
             ind = (items.index(item)) + 1
             if item["ingredients"] != "":
-                print(f"""{ind}- {
+                print(f"""{ind}. {
                     item['name']}{
                     item['ingredients']} (X{item['count']})""")
             else:
-                print(f"{ind}- {item['name']} (X{item['count']})")
+                print(f"{ind}. {item['name']} (X{item['count']})")
 
         choosen_pizza = input("\nRemove pizza:\n")
 
@@ -488,7 +492,7 @@ def terminate_program():
     This function is called only at the end of the program.
     It prints a goodbye message and then exits the progra.
     """
-    input("\nPress any key to exit:\n")
+    input("\nEnter any value to exit:\n")
 
     thanks = "Thank you for your order!"
 
