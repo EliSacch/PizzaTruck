@@ -42,7 +42,7 @@ def show_main_menu():
     if len(current_order) != 0:
         menu_options.insert(-1, "View current order")
 
-    action = menu_options[display_options(menu_options)-1]
+    action = menu_options[int(display_options(menu_options, "option"))-1]
     if action == "Menu and Order":
         clear_terminal()
         show_order_options()
@@ -70,23 +70,7 @@ def main_menu():
     show_main_menu()
 
 
-def display_options(options):
-    """
-    This function displays the options for the related section.
-    """
-    while True:
-        print("\nOptions:\n")
-        for option in options:
-            prefix = options.index(option) + 1
-            print(f"{prefix}. {option}")
-        choosen_action = input("\nChoose an action(enter the action number): ")
-        if validate_action(choosen_action, options):
-            break
-
-    return int(choosen_action)
-
-
-def display_ingredients_options(options, category):
+def display_options(options, category):
     """
     This function displays the options for the related section.
     It also takes the category input to display
@@ -119,14 +103,18 @@ def display_toppings_options(options, category):
     toppings_choice = []
     limit = 4
     count = 0
-    while (count < limit):
+    while True:
         print(f"\n{count} of {limit} toppings added.")
         choosen_option = input(f"\nChoose {category}:\n")
-        if (int(choosen_option) == 0):
+        if (choosen_option == "0"):
             break
         elif validate_action(choosen_option, options):
-            toppings_choice.append(options[int(choosen_option)-1])
+            index = choosen_option
+            toppings_choice.append(options[int(index)-1])
             count += 1
+
+        if (count >= limit):
+            break
 
     print("\nYou choose the following toppings: ")
 
@@ -156,7 +144,7 @@ def show_order_options():
         menu_options.insert(-1, "Remove pizza")
         menu_options.insert(-1, "View current order")
 
-    action = menu_options[display_options(menu_options)-1]
+    action = menu_options[int(display_options(menu_options, "option"))-1]
     if action == "Show menu":
         clear_terminal()
         show_menu()
@@ -185,23 +173,14 @@ def show_menu():
 
     print("\nMenu:\n")
 
-    menu = []
-
     for pizza in pizza_menu:
-        row = []
-        number = pizza_menu.index(pizza) + 1
-        row.append(number)
-        row.append(pizza.name.capitalize())
-        row.append(pizza.ingredients())
-        row.append(pizza.price)
-        menu.append(row)
+        item = f"""
+        {pizza.name.upper()}
+        {pizza.ingredients()}
+        €{pizza.price}\n"""
 
-    type_write(
-        tabulate(menu, headers=["#", "Name", "Ingredients", "Price/€"]),
-        0.000000001)
-
+        type_write(item, 0.000000001)
     print("\n* + €1.5 per topping\n")
-
     show_order_options()
 
 
@@ -325,7 +304,7 @@ def choose_dough():
         "Gluten free"
     ]
 
-    dough = display_ingredients_options(options, "dough")
+    dough = display_options(options, "dough")
 
     if validate_action(dough, options):
         return options[int(dough)-1]
@@ -341,7 +320,7 @@ def choose_sauce():
         "No sauce"
     ]
 
-    sauce = display_ingredients_options(options, "sauce")
+    sauce = display_options(options, "sauce")
 
     if validate_action(sauce, options):
         return options[int(sauce)-1]
@@ -385,7 +364,7 @@ def show_basket_menu():
     Displays the options available in the basket section
     """
     menu_options = ["Edit Order", "Place order", "Main menu"]
-    action = menu_options[display_options(menu_options)-1]
+    action = menu_options[display_options(menu_options, "option")-1]
     if action == "Edit Order":
         clear_terminal()
         show_order_options()
@@ -457,11 +436,10 @@ def display_current_order(items_count):
         row.append(f"{item['count']} X")
         if item["ingredients"] != "":
             row.append(f"""{
-                item['count']} X {
                 item['name']} {
                 item['ingredients']}""")
         else:
-            row.append(f"{item['count']} X {item['name'].capitalize()}")
+            row.append(f"{item['name'].capitalize()}")
         price = (float(item['count']) * float(item['price']))
         total_price += price
         row.append(f"€{price}")
@@ -508,7 +486,7 @@ def main():
     file = open("logo.txt")
     logo = file.read()
     file.close()
-    type_write(logo, 0.0000000000001)
+    # type_write(logo, 0.0000000000001)
 
     main_menu()
 
