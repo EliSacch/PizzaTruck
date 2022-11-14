@@ -486,7 +486,7 @@ def main():
     file = open("logo.txt")
     logo = file.read()
     file.close()
-    # type_write(logo, 0.0000000000001)
+    type_write(logo, 0.0000000000001)
 
     main_menu()
 
