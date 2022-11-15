@@ -228,7 +228,9 @@ def add_pizza(pizza_menu):
                 custom = make_custom_pizza()
                 add_to_order.append(custom)
             else:
-                add_to_order.append(pizza_menu[int(choosen_pizza)-1])
+                pizza = pizza_menu[int(choosen_pizza)-1]
+                add_to_order.append(pizza)
+                print(f"{pizza.name.capitalize()} added to the order")
 
     order = []
     for pizza in add_to_order:
@@ -484,7 +486,7 @@ def display_receipt(items_count):
         tabulate(recap_order, headers=["", "Name", "Price/€"]),
         0.000000001)
 
-    thanks = "Thank you for your order!"
+    thanks = "\n\nThank you for your order!"
 
     type_write(thanks, 0.0000000000001)
     sleep(10)

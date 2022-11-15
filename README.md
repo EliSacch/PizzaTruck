@@ -152,12 +152,45 @@ This will display the final receipt with the total price and a confirmation that
 ### Tests
 
   <details>
-  <summary>Home page - General</summary>
+  <summary>General</summary>
 
   |Action | Expected behavious | Pass / Fail|
   |-------|--------------------|-------|
+  |Open the link in the browser | It opens the mock terminal and load the introduction | Pass |
+  |Check the options | "View current order" is not available because there are no items in the order | Pass |
+  |Enter 2 | The goodbye message is displayed and the program stops | Pass |
+  |Click "Run Program" | The program starts again and shows the grretings | Pass |
+  |Enter a letter | A message informs us that it is an invalid value | Pass |
+  |Enter a number which is not an integer | A message informs us that it is an invalid value | Pass |
+  |Enter a integer outside the range of options | A message informs us that it is an invalid value | Pass |
+  |Enter 1 | The terminal shows the order options | Pass |
+  |Check the options | "Remove pizza" and "View current order" are not available because there are no items in the order | Pass |
+  |Enter several invalid values | A message informs us that it is an invalid value | Pass |
+  |Enter 1 | The pizza menu is printed on the terminal | Pass |
+  |Enter 2 | The available pizzas are displayed and we are asked to enter the desired pizza number | Pass |
+
+  </details>
+
+  <details>
+  <summary>Add a pizza</summary>
+
+  |Action | Expected behavious | Pass / Fail|
+  |-------|--------------------|-------|
+  |Enter several invalid values | A message informs us that it is an invalid value | Pass |
+  |Enter a value between 1 and 4 | Expected behavious here | Pass |
   |Action here | Expected behavious here | Pass |
   |Action here | Expected behavious here | Pass |
+  |Action here | Expected behavious here | Pass |
+  |Action here | Expected behavious here | Pass |
+  |Action here | Expected behavious here | Pass |
+
+  </details>
+
+  <details>
+  <summary>title</summary>
+
+  |Action | Expected behavious | Pass / Fail|
+  |-------|--------------------|-------|
   |Action here | Expected behavious here | Pass |
   |Action here | Expected behavious here | Pass |
   |Action here | Expected behavious here | Pass |
