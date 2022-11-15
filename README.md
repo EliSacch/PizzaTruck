@@ -177,28 +177,36 @@ This will display the final receipt with the total price and a confirmation that
   |Action | Expected behavious | Pass / Fail|
   |-------|--------------------|-------|
   |Enter several invalid values | A message informs us that it is an invalid value | Pass |
-  |Enter a value between 1 and 4 | Expected behavious here | Pass |
-  |Action here | Expected behavious here | Pass |
-  |Action here | Expected behavious here | Pass |
-  |Action here | Expected behavious here | Pass |
-  |Action here | Expected behavious here | Pass |
-  |Action here | Expected behavious here | Pass |
+  |Enter all values between 1 and 4 | The corresponding pizza is added to the order and we see a message to confirm it | Pass |
+  |Enter 5 | The program asks to choose the dough type | Pass |
+  |Enter an invalid value | A message informs us that it is an invalid value | Pass |
+  |Enter a valid value | A message confirms the choice and the program asks to choose the sauce | Pass |
+  |Enter an invalid value again | A message informs us that it is an invalid value | Pass |
+  |Enter a valid value | A message confirms the choice and the program asks to choose the toppings | Pass |
+  |Enter an invalid value again | A message informs us that it is an invalid value. The toppings count doesn't change | Pass |
+  |Enter a valid value | The toppings count increases | Pass |
+  |Add 4 toppings | The program confirms the toppings that we entered and asks us to add another pizza | Pass |
+  |Enter 0 | The program shows how many pizzas were added to the order and the order options  | Pass |
 
   </details>
 
   <details>
-  <summary>title</summary>
+  <summary>Other</summary>
 
   |Action | Expected behavious | Pass / Fail|
   |-------|--------------------|-------|
-  |Action here | Expected behavious here | Pass |
-  |Action here | Expected behavious here | Pass |
-  |Action here | Expected behavious here | Pass |
-  |Action here | Expected behavious here | Pass |
-  |Action here | Expected behavious here | Pass |
-  |Action here | Expected behavious here | Pass |
+  |Check the options | Because there are items in the order we see the "View order" and "Remove pizza option" | Pass |
+  |Enter 3 | The program shows the pizzas chosen by the user and the relative count | Pass |
+  |Enter an invalid value | A message informs us that it is an invalid value | Pass |
+  |Enter the number corresponding to one of the options | The program shows the updated count | Pass |
+  |Enter 0 | The program shows the order options | Pass |
+  |Enter 4 | The program shows the order summary with the correct pizzas and the basket option | Pass |
+  |Enter 1 | The order options are displayed again and the user can edit the order | Pass |
+  |Enter 4 | Return to current order view | Pass |
+  |Enter 2 | The program shows the receipt and it exits the program | Pass |
 
   </details>
+
 
 [Back to the top](#pizza-truck)
 

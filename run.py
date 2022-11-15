@@ -468,6 +468,7 @@ def display_receipt(items_count):
     This functions shows the final order and total price.
     It is called at the end of the flow, when the order is placed.
     """
+    print("\n****** YOUR RECEIPT ******\n")
     total_price = 0
     recap_order = []
 
@@ -490,7 +491,7 @@ def display_receipt(items_count):
 
     type_write(thanks, 0.0000000000001)
     sleep(10)
-    exit()
+    quit()
 
 
 # MAIN
