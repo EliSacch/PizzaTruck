@@ -62,6 +62,88 @@ To develop a program that answers all the needs identified above, I have created
 
 ## Features 
 
+When the program is launched the user is presented with the main menu. This menu works as landing page for the user that can decide if proceed, with the order or exit the program.
+
+The program follows the same pattern at each stages:
+1- provides information
+2- presents choice of actions/options to the user
+3- Receives the number corresponding to the user choice as input
+
+![Pattern](media/intro.png)
+
+### Input validation
+
+The user's input is validated to confirm that it corresponds to a valid option. All the inputs are validated through the same function, which accepts two parameters:
+1- The value that needs to be validated, and
+2- The array of options. This second parameter is passed to confirm if the value is in the range of valid options. 
+
+![Validation](media/validation.png)
+
+### Case related options
+
+To make the user experience more enjoyable the program displays only the valid actions. This means that some options are hidden if they are not relevant. In particular, if there are no items in the basket, the option to view the order and to remove items will be hidden.
+
+![No items order](media/no-current-order.png) ![Items in the order](media/with-current-order.png)
+
+### Pizzas Menu
+
+The pizzas are managed from a separate file, to keep them more maintainable.
+We can add new pizzas creating new instances of the class "Pizza". They are then added to the pizza_menu list ![Pizza menu list](media/pizza-menu-list.png)
+
+This way we can update the menu just in one place, and every time we need to display the available pizza we will display the correct and updated data.
+
+
+![Pizzas menu](media/pizza-menu-list.png)
+
+### Add pizza
+
+The user can add pizzas to the order by selecting the related option. It will show the available pizza by retrieving the data from the same pizza_menu list, so that the displayed option are automatically updated when the pizza menu is updated.
+
+This time the options are displayed as a short list. The user can go back to the menu if they want to consult the ingredients and prices and update their order at any time.
+
+![Add pizza](media/add-pizza.png)
+
+### Make your own
+
+The user can create a custom pizza by selecting the option "Make your own".
+The user will choose one option for the dough and one option for the sauce, from the available options.
+
+For the toppings the user can choose up to 4 toppings.
+
+For this reason the total of toppings is displayed to the user each time, so that they can see how many tippings they have left to select.
+
+
+![Add pizza](media/toppings.png)
+
+
+### View current order
+
+If there is at least one item in the order, the seller can review the current order.
+This option will display the added pizza, grouped by type, and the price total and subtotals.
+This page displays the ingredients only for the custom pizzas, so that the user can see if they have made the wrong choice of ingredients and eventually delete the pizza and create it from scratch.
+
+From this page the user can choose to edit the order, or to place it and exit the program
+
+![View order](media/view-current-order.png)
+
+
+### Remove pizza
+
+If the user added he wrong pizzas they have the option to remove them.
+
+This option displays a short list of the pizzas currently in the order, grouped by type, and the total count for each type. The user just needs to select the option number corresponding to the pizza they want to remove.
+
+The view is updated each time, so that the user can see which pizzas are left in the order.
+
+![Remove pizza](media/remove-pizza.png)
+
+
+### Place order
+
+When the user is ready to place the order they can click on the view order, to access the basket, and then select place order to finish.
+
+This will display the final receipt with the total price and a confirmation that the order was made.
+
 
 ## Testing 
 

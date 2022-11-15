@@ -1,8 +1,9 @@
 def validate_action(value, choices):
     """
-    Inside the try, converts all string values into integers.
+    Inside the try, we check if the string is numeric
+    (and therefore can be converted into integer).
     Raises ValueError if strings cannot be converted into int,
-    or if it is outside of the range of choices.
+    or IndexError if it is outside of the range of choices.
     """
     try:
         if value.isnumeric() is False:

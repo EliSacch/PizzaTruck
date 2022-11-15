@@ -151,7 +151,7 @@ def show_order_options():
         menu_options.insert(-1, "View current order")
 
     action = menu_options[int(display_options(menu_options, "option"))-1]
-    if action == "Show menu":
+    if action == "Show pizzas menu":
         clear_terminal()
         show_menu()
     elif action == "Add pizza":
@@ -177,7 +177,7 @@ def show_menu():
     This function shows the available pizzas, with ingredients and price
     """
 
-    print("\nMenu:\n")
+    print("\nMenu:")
 
     for pizza in pizza_menu:
         item = f"""
