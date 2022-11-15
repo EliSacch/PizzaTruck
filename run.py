@@ -141,7 +141,7 @@ def show_order_options():
     global current_order
 
     menu_options = [
-        "Show menu",
+        "Show pizzas menu",
         "Add pizza",
         "Main options"
     ]
@@ -484,20 +484,10 @@ def display_receipt(items_count):
         tabulate(recap_order, headers=["", "Name", "Price/€"]),
         0.000000001)
 
-
-# TERMINATE
-
-def terminate_program():
-    """
-    This function is called only at the end of the program.
-    It prints a goodbye message and then exits the progra.
-    """
-    input("\nEnter any value to exit:\n")
-
     thanks = "Thank you for your order!"
 
     type_write(thanks, 0.0000000000001)
-    sleep(5)
+    sleep(10)
     exit()
 
 

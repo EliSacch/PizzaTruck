@@ -7,6 +7,8 @@ The purpose of this program is to manage the user ordering process from beginnng
 
 [Link to live site](https://pizza-truck.herokuapp.com/)
 
+![Hero image](media/hero.png)
+
 
 ## Table of content
 
@@ -15,14 +17,20 @@ The purpose of this program is to manage the user ordering process from beginnng
   - [Flow Chart](#flow-chart)
 
 - [Features](#features)
-  
+  - [Validation](#input-validation)
+  - [Case related options](#case-related-options)
+  - [Pizzas menu](#pizzas-menu)
+  - [Add pizza](#add-pizza)
+  - [Make your own](#make-your-own)
+  - [View current order](#view-current-order)
+  - [Remove pizza](#remove-pizza)
+  - [Place order](#place-order)
 
 - [Testing](#testing)
   - [Tests](#tests)
   - [Validator Testing](#validator-testing)
   - [Fixed bugs](#fixed-bugs)
   - [Unfixed bugs](#unfixed-bugs)
-  - [Performance](#performance)
 
 - [Deployment](#deployment)
   - [Live Website](#live-website)
@@ -30,7 +38,6 @@ The purpose of this program is to manage the user ordering process from beginnng
 
 - [Credits](#credits)
   - [Code](#code)
-  - [Content](#content)
 
 - [Technologies used](#technologies-used)
 
@@ -53,12 +60,13 @@ The purpose of this program is to manage the user ordering process from beginnng
     - Being able to check and modify my order before placing it.
     - That the price is calculated correctly.
 
-
 ### Flow Chart
 
 To develop a program that answers all the needs identified above, I have created the following flow chart:
 
-![Flow_Chart](media/flow_chart.png)
+![Flow_Chart](media/flow-chart.png)
+
+[Back to the top](#pizza-truck)
 
 ## Features 
 
@@ -92,9 +100,6 @@ We can add new pizzas creating new instances of the class "Pizza". They are then
 
 This way we can update the menu just in one place, and every time we need to display the available pizza we will display the correct and updated data.
 
-
-![Pizzas menu](media/pizza-menu-list.png)
-
 ### Add pizza
 
 The user can add pizzas to the order by selecting the related option. It will show the available pizza by retrieving the data from the same pizza_menu list, so that the displayed option are automatically updated when the pizza menu is updated.
@@ -112,9 +117,7 @@ For the toppings the user can choose up to 4 toppings.
 
 For this reason the total of toppings is displayed to the user each time, so that they can see how many tippings they have left to select.
 
-
 ![Add pizza](media/toppings.png)
-
 
 ### View current order
 
@@ -126,7 +129,6 @@ From this page the user can choose to edit the order, or to place it and exit th
 
 ![View order](media/view-current-order.png)
 
-
 ### Remove pizza
 
 If the user added he wrong pizzas they have the option to remove them.
@@ -137,16 +139,15 @@ The view is updated each time, so that the user can see which pizzas are left in
 
 ![Remove pizza](media/remove-pizza.png)
 
-
 ### Place order
 
 When the user is ready to place the order they can click on the view order, to access the basket, and then select place order to finish.
 
 This will display the final receipt with the total price and a confirmation that the order was made.
 
+[Back to the top](#pizza-truck)
 
 ## Testing 
-
 
 ### Tests
 
@@ -166,6 +167,7 @@ This will display the final receipt with the total price and a confirmation that
 
   </details>
 
+[Back to the top](#pizza-truck)
 
 ### Validator Testing
 
@@ -231,13 +233,6 @@ I also used the new Code Institute linter to validate the code, and it also has 
     To fix this bug I changed the list from where the pizza types are taken.
     First I create a new list with each type of pizza actually added to the order, then I count how many times each one of this pizzas appears in the order.
 
-    For the custom pizzas I also display the ingredients; because they are custom so it is useful to see how it is made.
-    <details>
-    <summary>See fix screenshot</summary>
-    
-    ![Fix](media/display-order-fix.png)
-
-    </details>
     This fix was showing the custom pizzas, although they were still separate objects, so custom pizzas with same ingredients were actually displayed separately.
 
     To improve this functionality I wanted to display custom pizzas with same ingredients in the same line. To accomplish this result I created a new list of dictionaries, one for each pizza in the order, and than counted their recurrency.
@@ -265,23 +260,20 @@ I also used the new Code Institute linter to validate the code, and it also has 
 
     </details>
 
+[Back to the top](#pizza-truck)
 
 ### Unfixed Bugs
 
 - There are no known unfixed bugs.
 
 
-### Performance
-
-
 ## Deployment
-
 
 ### Live Website
 
 The live version of this program is available on Heroku.
 
-[click here to open](https://pizza-truck.herokuapp.com/)
+[Click here to open](https://pizza-truck.herokuapp.com/)
 
 
 ### Deployment on Heroku
@@ -297,7 +289,6 @@ The live version of this program is available on Heroku.
     - Select the relevant GitHub repository
     - Click on deploy branch
 
-
 ### Local Deployment
   - For a local deployment follow these steps:
     - Create a new directory on your machine, where you want do deploy the files
@@ -308,23 +299,33 @@ The live version of this program is available on Heroku.
     - Open your terminal and run the command __git clone 'link'__
     - use the link just copied, without quotes, instead of 'link'
 
+[Back to the top](#pizza-truck)
+
 ## Credits 
 
 ### Code
 - For this project I used the "Code Institute student template" required for deploying my third portfolio project (the Python command-line project). 
 
-- The code to display the intro message as typwriter was taken from the [Learn Learn Scratch Tutorial](https://www.youtube.com/watch?v=2h8e0tXHfk0)
+- The code to display the intro message as typewriter was taken from the [Learn Learn Scratch Tutorial](https://www.youtube.com/watch?v=2h8e0tXHfk0)
 
 - The code to clear the terminal was taken from the following article on [Stackoverflow](https://stackoverflow.com/questions/2084508/clear-terminal-in-python)
 
-
-### Content
-
-
 ## Technologies used
 
+### Main languages
+
   - Python
+
+### Python Libraries
+
+  - sys
+  - time
+  - os
+  - copy
+  - tabulate
 
 ## Acknowledgements
 
 A special thank to my mentor __Dick Vlaanderen__ for his precious feedback on this project.
+
+[Back to the top](#pizza-truck)
