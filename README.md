@@ -167,10 +167,15 @@ This will display the final receipt with the total price and a confirmation that
   </details>
 
 
-
-
 ### Validator Testing
 
+The PEP8 online website is not available at this point. For this reason I installed pycodestyle to my development environment (Visual Code studio), and fixed all the problems encountered during all stages of development.
+
+![pep8](media/pycodestyle.png)
+
+I also used the new Code Institute linter to validate the code, and it also has not detected any issue.
+
+![pep8ci](media/pep8ci.png)
 
 ### Fixed Bugs
 
@@ -273,6 +278,24 @@ This will display the final receipt with the total price and a confirmation that
 
 
 ### Live Website
+
+The live version of this program is available on Heroku.
+
+[click here to open](https://pizza-truck.herokuapp.com/)
+
+
+### Deployment on Heroku
+
+  - To deply this project on Heroku I followed these steps:
+    - Create an Heroku accoun
+    - Click on Add App
+    - Go to Settings > Config Vars
+    - Add the config KEY and VALUE provided by Code Institute, in order to be able to use the template provided for this project
+    - Click on add buildpack to add python and nodejs
+    - Go to deploy tab
+    - Select GitHub as deploy method
+    - Select the relevant GitHub repository
+    - Click on deploy branch
 
 
 ### Local Deployment
