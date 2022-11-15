@@ -359,11 +359,12 @@ The live version of this program is available on Heroku.
 
 ### Python Libraries
 
-  - sys
-  - time
-  - os
-  - copy
-  - tabulate
+  - sys - needed in the type_write function to simulate typewriter
+  - time - needed to set the chars printing time in the type_write
+  - sleep - needed at the end of the program to delay the termination
+  - os - needed in the function to clear the terminal
+  - copy - needed to copy the custom instance of pizza, and not overwrite it every time we create a custom pizza
+  - tabulate - to display the data as table
 
 ## Acknowledgements
 
